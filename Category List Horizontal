@@ -1,0 +1,39 @@
+// Category List View
+    var CategoryListView: some View {
+        HStack {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(CategoryList.filter { $0.title != "Ana Menü" }, id: \.id) { item in
+                        NavigationLink(destination: getDestinationView(for: item.title)) {
+                            Text(item.title)
+                                .padding(.horizontal, 30)
+                                .padding(.vertical, 20)
+                                .font(.system(size: 25))
+                                .background(selectedCategory == item.title ? Color.black.opacity(0.5) : Color.gray.opacity(0.1))
+                                .foregroundColor(.black)
+                                .clipShape(Capsule())
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+///////
+
+
+import Foundation
+
+struct CategoryModel: Identifiable , Hashable {
+    var id: UUID = .init()
+    var icon: String
+    var title: String
+}
+
+var CategoryList: [CategoryModel] = [
+      CategoryModel(icon: "", title: "Ana Menü"),
+      CategoryModel(icon: "", title: "Profilim"),
+      CategoryModel(icon: "", title: "Liderler Tablosu"),
+      CategoryModel(icon: "", title: "İstatistiklerim"),
+]
